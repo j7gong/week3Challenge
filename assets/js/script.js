@@ -9,7 +9,7 @@ var randomNumber = function(min, max) {
 
 // Generate password based on criteria
 var generatePassword = function(){
-  var criteria = window.prompt("Choose which criteria to include in the password. Enter 'Length' or 'Lowercase' or 'Uppercase' or 'Special Character' to choose. ");
+  var criteria = window.prompt("Choose which criteria to include in the password. Enter 'Length' or 'Lowercase' or 'Uppercase' or 'Numeric' or 'Special Character' to choose. ");
   
   if (criteria == "Length") {
     var pwLength = window.prompt("Enter a number for the length of password at least 8 characters and no more than 128 characters. For example, 8.")
@@ -28,9 +28,9 @@ var generatePassword = function(){
 
     }
   } else if (criteria == "Lowercase") {
-    var confirmLowercase = window.confirm("Would you like to include lowercase in password?");
+    var confirmL = window.confirm("Would you like to include lowercase in password?");
      
-    if (confirmLowercase) {
+    if (confirmL) {
       var pwLetter = " ";
       var characters = "abcdefghijklmnopqrstuvwxyz";
       var charactersLength = characters.length;
@@ -43,9 +43,9 @@ var generatePassword = function(){
       window.alert("Your password will not include lowercase.");
       };
   } else if (criteria == "Uppercase") {
-    var confirmUppercase = window.confirm("Would you like to include uppercase in password?");
+    var confirmU = window.confirm("Would you like to include uppercase in password?");
      
-    if (confirmUppercase) {
+    if (confirmU) {
       var pwLetter = " ";
       var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       var charactersLength = characters.length;
@@ -71,6 +71,21 @@ var generatePassword = function(){
       return pwLetter;
     } else {
       window.alert("Your password will not include special character.");
+      };
+  } else if (criteria == "Numeric") {
+    var confirmN = window.confirm("Would you like to include numeric in password?");
+     
+    if (confirmN) {
+      var pwLetter = " ";
+      var characters = "0123456789";
+      var charactersLength = characters.length;
+      var length = 10;
+      for (let i = 0; i < length; i++ ) {
+        pwLetter += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return pwLetter;
+    } else {
+      window.alert("Your password will not include numeric.");
       };
   }
 };
