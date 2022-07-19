@@ -42,6 +42,21 @@ var generatePassword = function(){
     } else {
       window.alert("Your password will not include lowercase.");
       };
+  } else if (criteria == "Uppercase") {
+    var confirmUppercase = window.confirm("Would you like to include uppercase in password?");
+     
+    if (confirmUppercase) {
+      var pwLetter = " ";
+      var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      var charactersLength = characters.length;
+      var length = 5;
+      for (let i = 0; i < length; i++ ) {
+        pwLetter += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return pwLetter;
+    } else {
+      window.alert("Your password will not include uppercase.");
+      };
   }
 };
 
