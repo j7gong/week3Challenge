@@ -34,7 +34,7 @@ var generatePassword = function(){
       var pwLetter = " ";
       var characters = "abcdefghijklmnopqrstuvwxyz";
       var charactersLength = characters.length;
-      var length = 5;
+      var length = 10;
       for (let i = 0; i < length; i++ ) {
         pwLetter += characters.charAt(Math.floor(Math.random() * charactersLength));
       }
@@ -49,13 +49,28 @@ var generatePassword = function(){
       var pwLetter = " ";
       var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       var charactersLength = characters.length;
-      var length = 5;
+      var length = 10;
       for (let i = 0; i < length; i++ ) {
         pwLetter += characters.charAt(Math.floor(Math.random() * charactersLength));
       }
       return pwLetter;
     } else {
       window.alert("Your password will not include uppercase.");
+      };
+  } else if (criteria == "Special Character") {
+    var confirmSC = window.confirm("Would you like to include special character in password?");
+     
+    if (confirmSC) {
+      var pwLetter = " ";
+      var characters = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+      var charactersLength = characters.length;
+      var length = 10;
+      for (let i = 0; i < length; i++ ) {
+        pwLetter += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return pwLetter;
+    } else {
+      window.alert("Your password will not include special character.");
       };
   }
 };
