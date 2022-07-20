@@ -1,3 +1,14 @@
+var indicatorLower = 0;
+var indicatorUpper = 0;
+var indicatorSC = 0;
+var indicatorN = 1;
+var pwLength = 10; 
+
+var lowercaseLetters = "";
+var uppercaseLetters = "";
+var specialLetters = "";
+var numeric = "";
+
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
@@ -7,53 +18,67 @@ var randomNumber = function(min, max) {
   return value;
 };
 
+var passwordGenerator = function(pwLength){
+  var pwLetter = " ";
+
+  if (indicatorLower){
+    lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
+  };
+  if (indicatorUpper){
+    uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  };
+  if (indicatorSC) {
+    specialLetters = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+  };
+  if (indicatorN) {
+    numeric = "0123456789";
+  };
+
+  var characters = lowercaseLetters + uppercaseLetters + specialLetters + numeric;
+  var charactersLength = characters.length;
+  
+  for (let i=0; i < pwLength; i++){
+    pwLetter += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  
+  return pwLetter;
+};
+
 // Generate password based on criteria
 var generatePassword = function(){
+  
   var criteria = window.prompt("Choose which criteria to include in the password. Enter 'Length' or 'Lowercase' or 'Uppercase' or 'Numeric' or 'Special Character' to choose. ");
   
   if (criteria == "Length") {
-    var pwLength = window.prompt("Enter a number for the length of password at least 8 characters and no more than 128 characters. For example, 8.")
-  
+    pwLength = window.prompt("Enter a number for the length of password at least 8 characters and no more than 128 characters. For example, 8.");
+    
     if (Number.isInteger(parseInt(pwLength))) {
-      
-      password = new Array();
-
-      for(let i=0; i<pwLength; i++){
-        password[i] = randomNumber(0, 9);
-      }
-      return password.toString().replace(/,/g, '');
-
+      return passwordGenerator(parseInt(pwLength));
     } else {
       window.alert("You did not enter a number. Try again.");
 
     }
   } else if (criteria == "Lowercase") {
     var confirmL = window.confirm("Would you like to include lowercase in password?");
-     
+    
     if (confirmL) {
-      var pwLetter = " ";
-      var characters = "abcdefghijklmnopqrstuvwxyz";
-      var charactersLength = characters.length;
-      var length = 10;
-      for (let i = 0; i < length; i++ ) {
-        pwLetter += characters.charAt(Math.floor(Math.random() * charactersLength));
+      indicatorLower = 1;
+      pwConfirm = window.confirm("Ready to generate your password OR want to choose other criteria?");
+      if (pwConfirm) {
+        return passwordGenerator(pwLength);
       }
-      return pwLetter;
     } else {
-      window.alert("Your password will not include lowercase.");
+      window.alert("Your password will not include lowercase. ");
       };
   } else if (criteria == "Uppercase") {
     var confirmU = window.confirm("Would you like to include uppercase in password?");
      
     if (confirmU) {
-      var pwLetter = " ";
-      var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      var charactersLength = characters.length;
-      var length = 10;
-      for (let i = 0; i < length; i++ ) {
-        pwLetter += characters.charAt(Math.floor(Math.random() * charactersLength));
+      indicatorUpper = 1;
+      pwConfirm = window.confirm("Ready to generate your password OR want to choose other criteria?");
+      if (pwConfirm) {
+        return passwordGenerator(pwLength);
       }
-      return pwLetter;
     } else {
       window.alert("Your password will not include uppercase.");
       };
@@ -61,14 +86,11 @@ var generatePassword = function(){
     var confirmSC = window.confirm("Would you like to include special character in password?");
      
     if (confirmSC) {
-      var pwLetter = " ";
-      var characters = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-      var charactersLength = characters.length;
-      var length = 10;
-      for (let i = 0; i < length; i++ ) {
-        pwLetter += characters.charAt(Math.floor(Math.random() * charactersLength));
+      indicatorSC = 1;
+      pwConfirm = window.confirm("Ready to generate your password OR want to choose other criteria?");
+      if (pwConfirm) {
+        return passwordGenerator(pwLength);
       }
-      return pwLetter;
     } else {
       window.alert("Your password will not include special character.");
       };
@@ -76,14 +98,11 @@ var generatePassword = function(){
     var confirmN = window.confirm("Would you like to include numeric in password?");
      
     if (confirmN) {
-      var pwLetter = " ";
-      var characters = "0123456789";
-      var charactersLength = characters.length;
-      var length = 10;
-      for (let i = 0; i < length; i++ ) {
-        pwLetter += characters.charAt(Math.floor(Math.random() * charactersLength));
+      indicatorN = 1;
+      pwConfirm = window.confirm("Ready to generate your password OR want to choose other criteria?");
+      if (pwConfirm) {
+        return passwordGenerator(pwLength);
       }
-      return pwLetter;
     } else {
       window.alert("Your password will not include numeric.");
       };
