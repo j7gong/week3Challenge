@@ -13,11 +13,6 @@ var numeric = "";
 var generateBtn = document.querySelector("#generate");
 
 // Get a random numeric value
-var randomNumber = function(min, max) {
-  var value = Math.floor(Math.random() * (max - min + 1) + min);
-  return value;
-};
-
 var passwordGenerator = function(pwLength){
   var pwLetter = " ";
   
@@ -121,9 +116,18 @@ var generateCriteria = function(){
 var generatePassword = function(){
   
   inputLength = window.prompt("Enter a number for the length of password at least 8 characters and no more than 128 characters. For example, 8.");
-    
-  if (Number.isInteger(parseInt(inputLength))) {
-    pwLength = inputLength;
+  intLength = parseInt(inputLength)  
+  if (Number.isInteger(intLength)) {
+    if (intLength > 7 && intLength < 129){
+      pwLength = intLength;
+    } else {
+      confirmRetry = window.confirm("Your number does not sit in range specified. Try again?");
+      if (confirmRetry){
+        generatePassword();
+      } else {
+        return;
+      }
+    }
   } else {
     confirmRetry = window.confirm("You did not enter a number. Try again?");
     if (confirmRetry){
