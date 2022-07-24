@@ -44,7 +44,7 @@ GIVEN I need a new, secure password
 ## **Website**
 https://j7gong.github.io/week3Challenge/
 
-![GitHub Logo](/assets/images/webImage.JPG)
+![GitHub Logo](/assets/images/webImg.JPG)
 
 ## **Contribution** 
 
