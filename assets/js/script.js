@@ -2,30 +2,28 @@
 
 var indicatorLower = localStorage.getItem("indicatorLower");
 var lowercaseLetters = localStorage.getItem("lowercaseLetters");
+var indicatorUpper = localStorage.getItem("indicatorUpper");
+var uppercaseLetters = localStorage.getItem("uppercaseLetters");
+var indicatorSC = localStorage.getItem("indicatorSC");
+var specialLetters = localStorage.getItem("specialLetters");
+var indicatorN = localStorage.getItem("indicatorN");
+var numeric = localStorage.getItem("numeric");
 
+// Initiate string pool as empty based on default indicator before user start
 if (indicatorLower == null) {
   
   localStorage.setItem("lowercaseLetters", "");
 }
-
-var indicatorUpper = localStorage.getItem("indicatorUpper");
-var uppercaseLetters = localStorage.getItem("uppercaseLetters");
 
 if (indicatorUpper == null) {
   
   localStorage.setItem("uppercaseLetters", "");
 }
 
-var indicatorSC = localStorage.getItem("indicatorSC");
-var specialLetters = localStorage.getItem("specialLetters");
-
 if (indicatorSC == null) {
   
   localStorage.setItem("specialLetters", "");
 }
-
-var indicatorN = localStorage.getItem("indicatorN");
-var numeric = localStorage.getItem("numeric");
 
 if (indicatorN == null) {
   
@@ -34,11 +32,6 @@ if (indicatorN == null) {
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
-
-// Reset criteria indicator once user generated password
-var refreshCriteria = function () {
-  localStorage.clear();
-}
 
 // Get a random numeric value
 var passwordGenerator = function(pwLength){
@@ -154,34 +147,41 @@ var generateCriteria = function(){
 // Generate password based on criteria
 var generatePassword = function(){
   
-  refreshCriteria();
-
+  // Reset criteria indicator once user generated password
+  localStorage.clear();
+  
   inputLength = window.prompt("Enter a number for the length of password at least 8 characters and no more than 128 characters. For example, 8.");
-  intLength = parseInt(inputLength)  
+  
+  if (inputLength == "" || inputLength == null) {
+    return;
+  } else {
+    // Error handling - check if input is a number
+    intLength = parseInt(inputLength)  
+    
+    // Error handling - check if number is in range specified
+    if (Number.isInteger(intLength)) {
+      if (intLength > 7 && intLength < 129){
+        pwLength = intLength;
 
-  if (Number.isInteger(intLength)) {
-    if (intLength > 7 && intLength < 129){
-      pwLength = intLength;
+        return generateCriteria();
 
-      return generateCriteria();
-
+      } else {
+        confirmRetry = window.confirm("Your number does not sit in range specified. Try again?");
+        if (confirmRetry){
+          generatePassword();
+        } else {
+          return;
+        }
+      }
     } else {
-      confirmRetry = window.confirm("Your number does not sit in range specified. Try again?");
+      confirmRetry = window.confirm("You did not enter a number. Try again?");
       if (confirmRetry){
         generatePassword();
       } else {
         return;
-      }
-    }
-  } else {
-    confirmRetry = window.confirm("You did not enter a number. Try again?");
-    if (confirmRetry){
-      generatePassword();
-    } else {
-      return;
-    }
+      };
   };
-  
+  };
 };
 
 // Write password to the #password input
